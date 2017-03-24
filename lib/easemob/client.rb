@@ -30,7 +30,7 @@ module Easemob
     ## 用户体系集成
 
     # 注册IM用户[单个]
-    def register_single_user(token, username, password, nickname = nil)
+    def create_user(token, username, password, nickname = nil)
       url = "#{@base_url}/users"
       headers = token_header(token)
       params = {
@@ -43,7 +43,7 @@ module Easemob
     end
 
     # 注册IM用户[批量]
-    def register_multi_users(token, users = [])
+    def create_users(token, users = [])
       url = "#{@base_url}/users"
       headers = token_header(token)
       params = users
@@ -52,7 +52,7 @@ module Easemob
     end
 
     # 获取IM用户[单个]
-    def get_single_user(token, username)
+    def get_user(token, username)
       url = "#{@base_url}/users/#{username}"
       headers = token_header(token)
       uri, req = @http_client.get_request(url, nil, headers)
@@ -60,7 +60,7 @@ module Easemob
     end
 
     # 获取IM用户[批量]
-    def get_multi_users(token, limit = 10)
+    def get_users(token, limit = 10)
       url = "#{@base_url}/users"
       headers = token_header(token)
       params = { limit: limit }
@@ -69,7 +69,7 @@ module Easemob
     end
 
     # 删除IM用户[单个]
-    def del_single_user(token, username)
+    def destroy_user(token, username)
       url = "#{@base_url}/users/#{username}"
       headers = token_header(token)
       uri, req = @http_client.del_request(url, nil, headers)
@@ -77,7 +77,7 @@ module Easemob
     end
 
     # 删除IM用户[批量]
-    def del_multi_users(token, limit = 2)
+    def destroy_users(token, limit = 2)
       url = "#{@base_url}/users"
       headers = token_header(token)
       params = { limit: limit }
@@ -114,7 +114,7 @@ module Easemob
 
     # 解除IM用户的好友关系
     # FIXME
-    def del_friend(token, owner_username, friend_username)
+    def remove_friend(token, owner_username, friend_username)
       url = "#{@base_url}/users/#{owner_username}/contacts/users/#{friend_username}"
       headers = token_header(token)
       uri, req = @http_client.del_request(url, nil, headers)
@@ -130,7 +130,7 @@ module Easemob
     end
 
     # 往IM用户的黑名单中加人
-    def add_blacks(token, owner_username, usernames = [])
+    def block(token, owner_username, usernames = [])
       url = "#{@base_url}/users/#{owner_username}/blocks/users"
       headers = token_header(token)
       params = { usernames: usernames }
@@ -147,7 +147,7 @@ module Easemob
     end
 
     # 从IM用户的黑名单中减人
-    def del_black(token, owner_username, blocked_username)
+    def unblock(token, owner_username, blocked_username)
       url = "#{@base_url}/users/#{owner_username}/blocks/users/#{blocked_username}"
       headers = token_header(token)
       uri, req = @http_client.del_request(url, nil, headers)
