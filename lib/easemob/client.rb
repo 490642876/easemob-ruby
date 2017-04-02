@@ -234,7 +234,7 @@ module Easemob
       params = {
         target_type: "users",
         target: [username],
-        mgs: {
+        msg: {
           type: "cmd",
           action: action,
         }
