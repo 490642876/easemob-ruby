@@ -244,6 +244,22 @@ module Easemob
       http_submit(uri, req)
     end
 
+    def send_text(token, username, text, ext_attrs={}) 
+      url = "#{@base_url}/messages"
+      headers = token_header(token)
+      params = {
+        target_type: "users",
+        target: [username],
+        msg: {
+          type: "txt",
+          msg: text,
+        }
+      }
+      params.merge(ext: ext_attrs) if ext_attrs.length > 0
+      uri, req = @http_client.post_request(url, params, headers)
+      http_submit(uri, req)
+    end
+
     # ==========================================================================
     ## 群组管理
 
