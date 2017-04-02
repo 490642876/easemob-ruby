@@ -228,6 +228,21 @@ module Easemob
     # 发送文本消息
     # 发送图片消息
     # ...
+    def send_cmd(token, username, action, ext_attrs={}) 
+      url = "#{@base_url}/messages"
+      headers = token_header(token)
+      params = {
+        target_type: "users",
+        target: [username],
+        mgs: {
+          type: "cmd",
+          action: action,
+        }
+      }
+      params.merge(ext: ext_attrs) if ext_attrs.length > 0
+      uri, req = @http_client.post_request(url, params, headers)
+      http_submit(uri, req)
+    end
 
     # ==========================================================================
     ## 群组管理
