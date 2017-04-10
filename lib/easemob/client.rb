@@ -5,7 +5,7 @@ require 'active_support/core_ext/hash/keys'
 module Easemob
   class Client
     attr_reader :client_id, :client_secret, :host, :org_name, :app_name, :base_url
-    attr_write :token
+    attr_writer :token
     def initialize
       @client_id = Easemob.configuration.client_id
       @client_secret = Easemob.configuration.client_secret
