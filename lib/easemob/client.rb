@@ -5,6 +5,7 @@ require 'active_support/core_ext/hash/keys'
 module Easemob
   class Client
     attr_reader :client_id, :client_secret, :host, :org_name, :app_name, :base_url
+    attr_write :token
     def initialize
       @client_id = Easemob.configuration.client_id
       @client_secret = Easemob.configuration.client_secret
@@ -13,6 +14,10 @@ module Easemob
       @app_name = Easemob.configuration.app_name
       @http_client = HttpClient.new
       @base_url = "#{@host}/#{@org_name}/#{@app_name}"
+    end
+
+    def token
+      @token or raise "No token, please set it first"
     end
 
     # 登录并授权
@@ -30,9 +35,9 @@ module Easemob
     ## 用户体系集成
 
     # 注册IM用户[单个]
-    def create_user(token, username, password, nickname = nil)
+    def create_user(username, password, nickname = nil)
       url = "#{@base_url}/users"
-      headers = token_header(token)
+      headers = token_header
       params = {
         username: username,
         password: password,
@@ -428,7 +433,7 @@ module Easemob
 
     private
 
-    def token_header(token)
+    def token_header
       authorization = "Bearer " + token
       { 'Authorization' => authorization }
     end
