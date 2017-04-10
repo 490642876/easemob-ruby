@@ -48,61 +48,61 @@ module Easemob
     end
 
     # 注册IM用户[批量]
-    def create_users(token, users = [])
+    def create_users(users = [])
       url = "#{@base_url}/users"
-      headers = token_header(token)
+      headers = token_header
       params = users
       uri, req = @http_client.post_request(url, params, headers)
       http_submit(uri, req)
     end
 
     # 获取IM用户[单个]
-    def get_user(token, username)
+    def get_user(username)
       url = "#{@base_url}/users/#{username}"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.get_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 获取IM用户[批量]
-    def get_users(token, limit = 10)
+    def get_users(limit = 10)
       url = "#{@base_url}/users"
-      headers = token_header(token)
+      headers = token_header
       params = { limit: limit }
       uri, req = @http_client.get_request(url, params, headers)
       http_submit(uri, req)
     end
 
     # 删除IM用户[单个]
-    def destroy_user(token, username)
+    def destroy_user(username)
       url = "#{@base_url}/users/#{username}"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.del_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 删除IM用户[批量]
-    def destroy_users(token, limit = 2)
+    def destroy_users(limit = 2)
       url = "#{@base_url}/users"
-      headers = token_header(token)
+      headers = token_header
       params = { limit: limit }
       uri, req = @http_client.del_request(url, params, headers)
       http_submit(uri, req)
     end
 
     # 重置IM用户密码
-    def reset_password(token, username, newpassword)
+    def reset_password(username, newpassword)
       url = "#{@base_url}/users/#{username}/password"
-      headers = token_header(token)
+      headers = token_header
       params = { newpassword: newpassword }
       uri, req = @http_client.put_request(url, params, headers)
       http_submit(uri, req)
     end
 
     # 修改用户昵称
-    def reset_nickname(token, username, nickname)
+    def reset_nickname(username, nickname)
       url = "#{@base_url}/users/#{username}"
-      headers = token_header(token)
+      headers = token_header
       params = { nickname: nickname }
       uri, req = @http_client.put_request(url, params, headers)
       http_submit(uri, req)
@@ -110,99 +110,99 @@ module Easemob
 
     # 给IM用户的添加好友
     # FIXME
-    def add_friend(token, owner_username, friend_username)
+    def add_friend(owner_username, friend_username)
       url = "#{@base_url}/users/#{owner_username}/contacts/users/#{friend_username}"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.post_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 解除IM用户的好友关系
     # FIXME
-    def remove_friend(token, owner_username, friend_username)
+    def remove_friend(owner_username, friend_username)
       url = "#{@base_url}/users/#{owner_username}/contacts/users/#{friend_username}"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.del_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 查看好友
-    def friends(token, owner_username)
+    def friends(owner_username)
       url = "#{@base_url}/users/#{owner_username}/contacts/users"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.get_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 往IM用户的黑名单中加人
-    def block(token, owner_username, usernames = [])
+    def block(owner_username, usernames = [])
       url = "#{@base_url}/users/#{owner_username}/blocks/users"
-      headers = token_header(token)
+      headers = token_header
       params = { usernames: usernames }
       uri, req = @http_client.post_request(url, params, headers)
       http_submit(uri, req)
     end
 
     # 获取IM用户的黑名单
-    def black_list(token, owner_username)
+    def black_list(owner_username)
       url = "#{@base_url}/users/#{owner_username}/blocks/users"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.get_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 从IM用户的黑名单中减人
-    def unblock(token, owner_username, blocked_username)
+    def unblock(owner_username, blocked_username)
       url = "#{@base_url}/users/#{owner_username}/blocks/users/#{blocked_username}"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.del_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 查看用户在线状态
-    def online_status(token, username)
+    def online_status(username)
       url = "#{@base_url}/users/#{username}/status"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.get_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 查询离线消息数
-    def offline_msg_count(token, owner_username)
+    def offline_msg_count(owner_username)
       url = "#{@base_url}/users/#{owner_username}/offline_msg_count"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.get_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 查询某条离线消息状态
-    def offline_msg_status(token, username, msg_id)
+    def offline_msg_status(username, msg_id)
       url = "#{@base_url}/users/#{username}/offline_msg_status/#{msg_id}"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.get_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 用户账号禁用
-    def deactivate_user(token, username)
+    def deactivate_user(username)
       url = "#{@base_url}/users/#{username}/deactivate"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.post_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 用户账号解禁
-    def activate_user(token, username)
+    def activate_user(username)
       url = "#{@base_url}/users/#{username}/activate"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.post_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 强制用户下线
-    def disconnect_user(token, username)
+    def disconnect_user(username)
       url = "#{@base_url}/users/#{username}/disconnect"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.get_request(url, nil, headers)
       http_submit(uri, req)
     end
@@ -211,9 +211,9 @@ module Easemob
     ## 聊天记录
 
     # 导出聊天记录
-    def export_chat_msgs(token, ql = nil, limit = nil, cursor = nil)
+    def export_chat_msgs(ql = nil, limit = nil, cursor = nil)
       url = "#{@base_url}/chatmessages"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.get_request(url, nil, headers)
       http_submit(uri, req)
     end
@@ -233,9 +233,9 @@ module Easemob
     # 发送文本消息
     # 发送图片消息
     # ...
-    def send_cmd(token, username, action, ext_attrs={}) 
+    def send_cmd(username, action, ext_attrs={}) 
       url = "#{@base_url}/messages"
-      headers = token_header(token)
+      headers = token_header
       params = {
         target_type: "users",
         target: [username],
@@ -249,9 +249,9 @@ module Easemob
       http_submit(uri, req)
     end
 
-    def send_text(token, username, text, ext_attrs={}) 
+    def send_text(username, text, ext_attrs={}) 
       url = "#{@base_url}/messages"
-      headers = token_header(token)
+      headers = token_header
       params = {
         target_type: "users",
         target: [username],
@@ -269,26 +269,26 @@ module Easemob
     ## 群组管理
 
     # 获取app中所有的群组
-    def groups(token)
+    def groups
       url = "#{@base_url}/chatgroups"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.get_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 获取一个或者多个群组的详情
-    def groups_details(token, group_ids = [])
+    def groups_details(group_ids = [])
       params = group_ids.join(',')
       url = "#{@base_url}/chatgroups/#{params}"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.get_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 创建一个群组
-    def create_group(token, group_params = {})
+    def create_group(group_params = {})
       url = "#{@base_url}/chatgroups"
-      headers = token_header(token)
+      headers = token_header
       group_private_or_not = group_params[:group_private_or_not] || false  # 是否是公开群, 此属性为必须的,为false时为私有群
       maxusers = group_params[:maxusers] || 200  # 群组成员最大数(包括群主), 值为数值类型,默认值200,此属性为可选的
       approval = group_params[:approval] || false  # 加入公开群是否需要批准, 默认值是false（加群不需要群主批准）, 此属性为可选的,只作用于公开群
@@ -307,9 +307,9 @@ module Easemob
     end
 
     # 修改群组信息
-    def update_group_info(token, group_id, group_params = {})
+    def update_group_info(group_id, group_params = {})
       url = "#{@base_url}/chatgroups/#{group_id}"
-      headers = token_header(token)
+      headers = token_header
       params = {}
       [:groupname, :description, :maxusers].each do |sym|
         params.merge!({ sym => group_params[sym] }) if group_params[sym]
@@ -319,51 +319,51 @@ module Easemob
     end
 
     # 删除群组
-    def del_group(token, group_id)
+    def del_group(group_id)
       url = "#{@base_url}/chatgroups/#{group_id}"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.del_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 获取群组中的所有成员
-    def group_members(token, group_id)
+    def group_members(group_id)
       url = "#{@base_url}/chatgroups/#{group_id}/users"
-      headers = token_header(token)
+      headers = token_header
       uri, req = @http_client.get_request(url, nil, headers)
       http_submit(uri, req)
     end
 
     # 群组加人[单个]
     # FIXME
-    def add_member(token, group_id, username)
+    def add_member(group_id, username)
       url = "#{@base_url}/chatgroups/#{group_id}/users/#{username}"
-      headers = token_header token
+      headers = token_header
       uri, req = @http_client.post_request url, nil, headers
       http_submit uri, req
     end
 
     # 群组加人[批量]
-    def add_members(token, group_id, usernames = [])
+    def add_members(group_id, usernames = [])
       url = "#{@base_url}/chatgroups/#{group_id}/users"
-      headers = token_header token
+      headers = token_header
       params = { usernames: usernames }
       uri, req = @http_client.post_request url, params, headers
       http_submit uri, req
     end
 
     # 群组减人
-    def del_member(token, group_id, username)
+    def del_member(group_id, username)
       url = "#{@base_url}/chatgroups/#{group_id}/users/#{username}"
-      headers = token_header token
+      headers = token_header
       uri, req = @http_client.del_request url, nil, headers
       http_submit uri, req
     end
 
     # 获取一个用户参与的所有群组
-    def user_gropus(token, username)
+    def user_gropus(username)
       url = "#{@base_url}/users/#{username}/joined_chatgroups"
-      headers = token_header token
+      headers = token_header
       uri, req = @http_client.get_request url, nil, headers
       http_submit uri, req
     end
@@ -372,9 +372,9 @@ module Easemob
     ## 聊天室管理
 
     # 创建聊天室
-    def create_room(token, room = {})
+    def create_room(room = {})
       url = "#{@base_url}/chatrooms"
-      headers = token_header token
+      headers = token_header
       maxusers = room[:maxusers] || 200
       params = {
         name: room[:name],
@@ -388,9 +388,9 @@ module Easemob
     end
 
     # 修改聊天室信息
-    def update_room_info(token, room_id, room_params)
+    def update_room_info(room_id, room_params)
       url = "#{@base_url}/chatrooms/#{room_id}"
-      headers = token_header token
+      headers = token_header
       params = {}
       [:name, :description, :maxusers].each do |sym|
         params.merge!({ sym => room_params[sym] }) if room_params[sym]
@@ -400,33 +400,33 @@ module Easemob
     end
 
     # 删除聊天室
-    def del_room(token, room_id)
+    def del_room(room_id)
       url = "#{@base_url}/chatrooms/#{room_id}"
-      headers = token_header token
+      headers = token_header
       uri, req = @http_client.del_request url, nil, headers
       http_submit uri, req
     end
 
     # 获取app中所有的聊天室
-    def rooms(token)
+    def rooms
       url = "#{@base_url}/chatrooms"
-      headers = token_header token
+      headers = token_header
       uri, req = @http_client.get_request url, nil, headers
       http_submit uri, req
     end
 
     # 获取一个聊天室详情
-    def room_info(token, room_id)
+    def room_info(room_id)
       url = "#{@base_url}/chatrooms/#{room_id}"
-      headers = token_header token
+      headers = token_header
       uri, req = @http_client.get_request url, nil, headers
       http_submit uri, req
     end
 
     # 获取用户加入的聊天室
-    def user_rooms(token, username)
+    def user_rooms(username)
       url = "#{@base_url}/users/#{username}/joined_chatrooms"
-      headers = token_header token
+      headers = token_header
       uri, req = @http_client.get_request url, nil, headers
       http_submit uri, req
     end
