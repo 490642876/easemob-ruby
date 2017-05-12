@@ -244,7 +244,7 @@ module Easemob
           action: action,
         }
       }
-      params.merge(ext: ext_attrs) if ext_attrs.length > 0
+      params.merge!(ext: ext_attrs) if ext_attrs.length > 0
       uri, req = @http_client.post_request(url, params, headers)
       http_submit(uri, req)
     end
@@ -260,7 +260,7 @@ module Easemob
           msg: text,
         }
       }
-      params.merge(ext: ext_attrs) if ext_attrs.length > 0
+      params.merge!(ext: ext_attrs) if ext_attrs.length > 0
       uri, req = @http_client.post_request(url, params, headers)
       http_submit(uri, req)
     end
