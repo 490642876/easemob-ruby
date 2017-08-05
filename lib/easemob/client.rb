@@ -238,7 +238,7 @@ module Easemob
       headers = token_header
       params = {
         target_type: "users",
-        target: [username],
+        target: [username].flatten,
         msg: {
           type: "cmd",
           action: action,
@@ -254,7 +254,7 @@ module Easemob
       headers = token_header
       params = {
         target_type: "users",
-        target: [username],
+        target: [username].flatten,
         msg: {
           type: "txt",
           msg: text,
