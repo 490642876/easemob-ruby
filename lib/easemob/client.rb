@@ -431,6 +431,42 @@ module Easemob
       http_submit uri, req
     end
 
+    # 添加聊天室成员[单个]
+    def room_add_member(room_id, username)
+      url = "#{@base_url}/chatrooms/#{room_id}/users/#{username}"
+      headers = token_header
+      uri, req = @http_client.post_request url, nil, headers
+      http_submit uri, req
+    end
+
+    # 删除聊天室成员[单个]
+    def room_del_member(room_id, username)
+      url = "#{@base_url}/chatrooms/#{room_id}/users/#{username}"
+      headers = token_header
+      uri, req = @http_client.del_request url, nil, headers
+      http_submit uri, req
+    end
+
+    # 添加禁言
+    def room_mute_members(room_id, usernames, mute_duration)
+      url = "#{@base_url}/chatrooms/#{room_id}/mute"
+      headers = token_header
+      params = {
+        usernames: usernames,
+        mute_duration: mute_duration
+      }
+      uri, req = @http_client.post_request url, params, headers
+      http_submit uri, req
+    end
+
+    # 移除禁言
+    def room_del_mute_members(room_id, usernames)
+      url = "#{@base_url}/chatrooms/#{room_id}/mute/#{usernames.join(',')}"
+      headers = token_header
+      uri, req = @http_client.del_request url, nil, headers
+      http_submit uri, req
+    end
+
     private
 
     def token_header
